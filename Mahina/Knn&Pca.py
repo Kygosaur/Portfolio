@@ -121,7 +121,7 @@ class KNNCentroidsPlotter:
         self.plot_confusion_matrix(X_test, y_test)
         self.print_classification_report(X_test, y_test)
 
-excel_file = r'Mahina\Sensor Data (1).xlsx'
+excel_file = r'Mahina\Sensor Data.xlsx'
 sheet_name = 'k-NN MQ2'
 knn_plotter = KNNCentroidsPlotter(excel_file, sheet_name)
 knn_plotter.run(colors=['red', 'green', 'blue', 'orange', 'purple'])
