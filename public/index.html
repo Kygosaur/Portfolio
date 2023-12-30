@@ -92,51 +92,51 @@
   });
   
   document.getElementById('submitButton').addEventListener('click', async function(event) {
-   event.preventDefault();
-   
-   const name = document.getElementById('name').value;
-   const room = document.getElementById('room').value;
-   const dates = fp.selectedDates; 
-  
-   if (!name || !room || !dates.length) {
-   alert('Please fill in all required fields');
-   return;
-  }
-  
-   for (let date of dates) {
-   // Check if date is already booked
-   const snapshot = await db.collection("bookings").where("date", "==", date).get();
-   if (!snapshot.empty) {
-     alert("This date is already booked.");
-     continue;
-   }
-  
-   try {
-     const docRef = await db.collection("bookings").add({
-         name: name,
-         room: room,
-         date: date
-     });
-     console.log("Document written with ID: ", docRef.id);
-     // Show success message
-     document.getElementById('successContainer').style.display = 'block';
-     // Hide form
-     document.getElementById('bookingForm').style.display = 'none';
-     // Hide outer input form
-     document.querySelector('.container').style.display = 'none';
-     // Reset form fields
-     document.getElementById('name').value = '';
-     document.getElementById('room').value = '';
-     fp.clear();
-   } catch (error) {
-     if (error.code === 'permission-denied') {
-       alert("You don't have permission to write to the Firestore database.");
-     } else {
-       console.error("Error adding document: ", error);
-     }
-   }
-   }
-  }); 
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const room = document.getElementById('room').value;
+    const dates = fp.selectedDates; 
+    
+    if (!name || !room || !dates.length) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    
+    for (let date of dates) {
+      // Check if room and date combination is already booked
+      const snapshot = await db.collection("bookings").where("room", "==", room).where("date", "==", date).get();
+      if (!snapshot.empty) {
+        alert(`The room ${room} is already booked for the date ${date}.`);
+        continue;
+      }
+    
+      try {
+        const docRef = await db.collection("bookings").add({
+            name: name,
+            room: room,
+            date: date
+        });
+        console.log("Document written with ID: ", docRef.id);
+        // Show success message
+        document.getElementById('successContainer').style.display = 'block';
+        // Hide form
+        document.getElementById('bookingForm').style.display = 'none';
+        // Hide outer input form
+        document.querySelector('.container').style.display = 'none';
+        // Reset form fields
+        document.getElementById('name').value = '';
+        document.getElementById('room').value = '';
+        fp.clear();
+      } catch (error) {
+        if (error.code === 'permission-denied') {
+          alert("You don't have permission to write to the Firestore database.");
+        } else {
+          console.error("Error adding document: ", error);
+        }
+      }
+    }
+   });    
   </script>
   
 
