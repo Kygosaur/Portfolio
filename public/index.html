@@ -54,7 +54,7 @@
  
 <!-- Success message container -->
 <div id="successContainer" style="display: none;">
-<img src="https://github.com/Kygosaur/Portfolio/raw/main/functions/greentick.png" alt="Success">
+<img src="https://github.com/Kygosaur/Portfolio/raw/main/functions/Gtick.png" alt="Success">
  <h2>Submission Successful</h2>
 </div>
 
@@ -63,65 +63,82 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-// Initialize Firebase
-const firebaseConfig = {
- apiKey: "AIzaSyB8Nv1Nt6RlMiLNj9mab01ixVeUECxPIWY",
- authDomain: "booking-88671.firebaseapp.com",
- databaseURL: "https://booking-88671-default-rtdb.asia-southeast1.firebasedatabase.app",
- projectId: "booking-88671",
- storageBucket: "booking-88671.appspot.com",
- messagingSenderId: "521939658802",
- appId: "1:521939658802:web:8820e7b2514d942195342b",
- measurementId: "G-RY6QSDSMV2"
-};
-
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
-
-var today = new Date();
-
-var fp = flatpickr("#date", {
- mode: "multiple",
- dateFormat: "Y-m-d",
- minDate: today,
- onDayCreate: function(dObj, dStr, fp, dayElem){
- dayElem.addEventListener('dblclick', function(){
+  // Initialize Firebase
+  const firebaseConfig = {
+   apiKey: "AIzaSyB8Nv1Nt6RlMiLNj9mab01ixVeUECxPIWY",
+   authDomain: "booking-88671.firebaseapp.com",
+   databaseURL: "https://booking-88671-default-rtdb.asia-southeast1.firebasedatabase.app",
+   projectId: "booking-88671",
+   storageBucket: "booking-88671.appspot.com",
+   messagingSenderId: "521939658802",
+   appId: "1:521939658802:web:8820e7b2514d942195342b",
+   measurementId: "G-RY6QSDSMV2"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  
+  const today = new Date();
+  
+  const fp = flatpickr("#date", {
+   mode: "multiple",
+   dateFormat: "Y-m-d",
+   minDate: today,
+   onDayCreate: function(dObj, dStr, fp, dayElem){
+   dayElem.addEventListener('dblclick', function(){
    fp.clear();
- });
- }
-});
-
-document.getElementById('submitButton').addEventListener('click', function(event) {
- event.preventDefault();
- 
- var name = document.getElementById('name').value;
- var room = document.getElementById('room').value;
- var dates = fp.selectedDates; 
- 
- dates.forEach(function(date) {
-   db.collection("bookings").add({
-       name: name,
-       room: room,
-       date: date
-   })
-   .then((docRef) => {
-       console.log("Document written with ID: ", docRef.id);
-       // Show success message
-       document.getElementById('successContainer').style.display = 'block';
-       // Hide form
-       document.getElementById('bookingForm').style.display = 'none';
-       // Reset form fields
-       document.getElementById('name').value = '';
-       document.getElementById('room').value = '';
-       fp.clear();
-   })
-   .catch((error) => {
-       console.error("Error adding document: ", error);
    });
- });
- }); 
- 
-</script>
+   }
+  });
+  
+  document.getElementById('submitButton').addEventListener('click', async function(event) {
+   event.preventDefault();
+   
+   const name = document.getElementById('name').value;
+   const room = document.getElementById('room').value;
+   const dates = fp.selectedDates; 
+  
+   if (!name || !room || !dates.length) {
+   alert('Please fill in all required fields');
+   return;
+  }
+  
+   for (let date of dates) {
+   // Check if date is already booked
+   const snapshot = await db.collection("bookings").where("date", "==", date).get();
+   if (!snapshot.empty) {
+     alert("This date is already booked.");
+     continue;
+   }
+  
+   try {
+     const docRef = await db.collection("bookings").add({
+         name: name,
+         room: room,
+         date: date
+     });
+     console.log("Document written with ID: ", docRef.id);
+     // Show success message
+     document.getElementById('successContainer').style.display = 'block';
+     // Hide form
+     document.getElementById('bookingForm').style.display = 'none';
+     // Hide outer input form
+     document.querySelector('.container').style.display = 'none';
+     // Reset form fields
+     document.getElementById('name').value = '';
+     document.getElementById('room').value = '';
+     fp.clear();
+   } catch (error) {
+     if (error.code === 'permission-denied') {
+       alert("You don't have permission to write to the Firestore database.");
+     } else {
+       console.error("Error adding document: ", error);
+     }
+   }
+   }
+  }); 
+  </script>
+  
 
 </body>
 
