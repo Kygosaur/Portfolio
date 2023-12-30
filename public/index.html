@@ -14,42 +14,50 @@
 <body>
  <div class="cube-container">
  <div class="cube">
-  <div class="face front"></div>
-  <div class="face back"></div>
-  <div class="face top"></div>
-  <div class="face bottom"></div>
-  <div class="face left"></div>
-  <div class="face right"></div>
+ <div class="face front"></div>
+ <div class="face back"></div>
+ <div class="face top"></div>
+ <div class="face bottom"></div>
+ <div class="face left"></div>
+ <div class="face right"></div>
  </div>
  </div>
  <div class="container">
  <form id="bookingForm">
-    <div class="inputBox">
-        <label for="name">Name Input :</label>
-        <input type="text" id="name" name="name" placeholder="Your name...." />
-    </div>
+ <!-- Input fields -->
+ <div class="inputBox">
+     <label for="name">Name Input :</label>
+     <input type="text" id="name" name="name" placeholder="Your name...." />
+ </div>
 
-    <div class="inputBox">
-        <label for="room">Room Selection :</label>
-        <select id="room" name="room">
-          <option value="1">Room 1</option>
-          <option value="2">Room 2</option>
-          <option value="3">Room 3</option>
-          <option value="4">Room 4</option>
-        </select>
-    </div>
+ <div class="inputBox">
+     <label for="room">Room Selection :</label>
+     <select id="room" name="room">
+       <option value="1">Room 1</option>
+       <option value="2">Room 2</option>
+       <option value="3">Room 3</option>
+       <option value="4">Room 4</option>
+     </select>
+ </div>
 
-    <div class="inputBox">
-        <label for="date">Date Selection :</label>
-        <input type="text" id="date" name="date" />
-    </div>
+ <div class="inputBox">
+     <label for="date">Date Selection :</label>
+     <input type="text" id="date" name="date" />
+ </div>
 
-    <div class="inputBox">
-      <button type="button" id="submitButton">Submit</button>
-    </div>
+ <!-- Submit button -->
+ <div class="inputBox">
+   <button type="button" id="submitButton">Submit</button>
+ </div>
  </form>
  </div>
  
+<!-- Success message container -->
+<div id="successContainer" style="display: none;">
+<img src="https://github.com/Kygosaur/Portfolio/raw/main/functions/greentick.png" alt="Success">
+ <h2>Submission Successful</h2>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -77,48 +85,42 @@ var fp = flatpickr("#date", {
  dateFormat: "Y-m-d",
  minDate: today,
  onDayCreate: function(dObj, dStr, fp, dayElem){
-  dayElem.addEventListener('dblclick', function(){
-      fp.clear();
-  });
+ dayElem.addEventListener('dblclick', function(){
+   fp.clear();
+ });
  }
 });
 
 document.getElementById('submitButton').addEventListener('click', function(event) {
  event.preventDefault();
-
+ 
  var name = document.getElementById('name').value;
  var room = document.getElementById('room').value;
  var dates = fp.selectedDates; 
-
+ 
  dates.forEach(function(date) {
-  db.collection("bookings").add({
-      name: name,
-      room: room,
-      date: date
-  })
-  .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-      // Disable the submit button after successful submission
-      event.target.disabled = true;
-      // Display a success message
-      displaySuccessMessage();
-  })
-  .catch((error) => {
-      console.error("Error adding document: ", error);
-  });
+   db.collection("bookings").add({
+       name: name,
+       room: room,
+       date: date
+   })
+   .then((docRef) => {
+       console.log("Document written with ID: ", docRef.id);
+       // Show success message
+       document.getElementById('successContainer').style.display = 'block';
+       // Hide form
+       document.getElementById('bookingForm').style.display = 'none';
+       // Reset form fields
+       document.getElementById('name').value = '';
+       document.getElementById('room').value = '';
+       fp.clear();
+   })
+   .catch((error) => {
+       console.error("Error adding document: ", error);
+   });
  });
-});
-
-// Function to display a success message
-function displaySuccessMessage() {
-  var successMsg = document.createElement('div');
-  successMsg.innerHTML = '<img src="https://github.com/Kygosaur/Portfolio/blob/main/functions/greentick.png" alt="Success"><br><h2>Submission Successful</h2>';
-  successMsg.style.position = 'fixed';
-  successMsg.style.left = '50%';
-  successMsg.style.top = '50%';
-  successMsg.style.transform = 'translate(-50%, -50%)';
-  document.body.appendChild(successMsg);
-}
+ }); 
+ 
 </script>
 
 </body>
