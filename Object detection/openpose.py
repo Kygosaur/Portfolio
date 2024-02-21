@@ -11,7 +11,6 @@ opWrapper = op.WrapperPython()
 opWrapper.configure(params)
 opWrapper.start()
 
-# Process webcam input
 cap = cv2.VideoCapture(0)
 while cap.isOpened():
     ret, frame = cap.read()

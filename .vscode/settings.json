@@ -43,5 +43,6 @@
         "xtr1common": "cpp",
         "xutility": "cpp"
     },
-    "cmake.sourceDirectory": "C:/Users/Kygo/Portfolio/detectron2/tools/deploy"
+    "cmake.sourceDirectory": "C:/Users/Kygo/Portfolio/openpose-master",
+    "git.ignoreLimitWarning": true
 }
