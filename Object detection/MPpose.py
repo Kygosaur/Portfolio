@@ -1,4 +1,5 @@
 import mediapipe as mp
+
 import cv2
 cap = cv2.VideoCapture(0)  # Use  0 for the default webcam
 mp_drawing = mp.solutions.drawing_utils

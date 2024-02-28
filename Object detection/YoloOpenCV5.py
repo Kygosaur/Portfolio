@@ -4,7 +4,6 @@ from PIL import Image
 
 # Model
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
-
 # Webcam
 cap = cv2.VideoCapture(0)  #   0 is the default camera index
 

@@ -2,14 +2,13 @@ from ikomia.dataprocess.workflow import Workflow
 from ikomia.utils import ik
 from ikomia.utils.displayIO import display
 import cv2
-
+import numpy
 
 stream = cv2.VideoCapture(0)
 
 # Init the workflow
 wf = Workflow()
 
-# Add color conversion
 cvt = wf.add_task(ik.ocv_color_conversion(code=str(cv2.COLOR_BGR2RGB)), auto_connect=True)
 
 # Add YOLOv7 detection
