@@ -1,0 +1,7 @@
+train: "C:/Users/Kygo/Portfolio/yolov7/train"
+test: "C:/Users/Kygo/Portfolio/yolov7/test"
+val: "C:/Users/Kygo/Portfolio/yolov7/val"
+# Number of Classes
+nc:  3
+# Classes
+names: ['hard hat', 'safety shoes','shoes']
