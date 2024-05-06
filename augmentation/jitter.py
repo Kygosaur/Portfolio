@@ -55,6 +55,6 @@ def process_images_and_texts(input_dir, output_dir):
                 shutil.copy(txt_path, os.path.join(output_dir, new_txt_filename))
 
 if __name__ == "__main__":
-    input_dir = r'c:\Users\Kygo\Desktop\valCrop'
-    output_dir = r'C:\Users\Kygo\Desktop\val'
+    input_dir = r'c:\Users\Kygo\Desktop\valcrop'
+    output_dir = r'C:\Users\Kygo\Desktop\train'
     process_images_and_texts(input_dir, output_dir)

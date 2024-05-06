@@ -16,6 +16,6 @@ def append_string_to_file_names(directory, string_to_append):
             print(f"Renamed '{filename}' to '{new_filename}'.")
 
 # Example usage
-directory = r'C:\Users\Kygo\Desktop\trainCrop'
-string_to_append = '_image' # Example string to append to file names
+directory = r'c:\Users\Kygo\Desktop\320-croppadded'
+string_to_append = 'why' # Example string to append to file names
 append_string_to_file_names(directory, string_to_append)

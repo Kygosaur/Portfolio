@@ -2,7 +2,7 @@ from PIL import Image
 import os
 import shutil
 
-def resize_images(image_dir, resized_dir, size=(640, 640)):
+def resize_images(image_dir, resized_dir, size=(320, 320)):
     """
     Resizes images in the given directory to the specified size and copies corresponding .txt files.
 
@@ -41,7 +41,7 @@ def resize_images(image_dir, resized_dir, size=(640, 640)):
 
 
 if __name__ == "__main__":
-    image_dir = r"c:\Users\Kygo\Desktop\converse"
-    resized_dir = r"C:\Users\Kygo\Desktop\other"
+    image_dir = r"c:\Users\Kygo\Desktop\crop only"
+    resized_dir = r"C:\Users\Kygo\Desktop\crop-original"
 
     resize_images(image_dir, resized_dir)
