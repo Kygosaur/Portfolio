@@ -57,4 +57,6 @@ def process_images_and_texts(input_dir, output_dir):
 if __name__ == "__main__":
     input_dir = r'c:\Users\Kygo\Desktop\valcrop'
     output_dir = r'C:\Users\Kygo\Desktop\train'
+    input_dir = r'c:\Users\Kygo\Desktop\valCrop'
+    output_dir = r'C:\Users\Kygo\Desktop\val'
     process_images_and_texts(input_dir, output_dir)

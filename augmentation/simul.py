@@ -75,6 +75,11 @@ def process_images_and_texts(input_dir: str, output_dir: str):
                     shutil.copy(txt_path, os.path.join(output_dir, new_txt_filename))
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     input_dir = r'c:\Users\Kygo\Desktop\new'
     output_dir = r'C:\Users\Kygo\Desktop\extra'
+=======
+    input_dir = r'C:\Users\Kygo\Portfolio\yolov7\train'
+    output_dir = r'C:\Users\Kygo\Desktop\train'
+>>>>>>> 8126ae5d52b5ca214272d46f2873dd5b981d4dab
     process_images_and_texts(input_dir, output_dir)

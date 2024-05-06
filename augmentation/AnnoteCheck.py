@@ -28,8 +28,8 @@ def count_objects_per_class(annotation_dir):
 
     return class_counts
 
-if __name__ == "__main__":
-    annotation_dir = r"c:\Users\Kygo\Desktop\exp4"
+def main():
+    annotation_dir = r"C:\Users\Kygo\Portfolio\YOLOv7\yolov7\train"
     class_counts = count_objects_per_class(annotation_dir)
 
     print("Number of objects per class:")
