@@ -28,11 +28,10 @@ def count_objects_per_class(annotation_dir):
 
     return class_counts
 
-def main():
-    annotation_dir = r"C:\Users\Kygo\Portfolio\YOLOv7\yolov7\train"
-    class_counts = count_objects_per_class(annotation_dir)
+annotation_dir = r"yolov7/train"
+class_counts = count_objects_per_class(annotation_dir)
 
-    print("Number of objects per class:")
-    for class_id, count in class_counts.items():
-        print(f"Class {class_id}: {count} objects")
+print("Number of objects per class:")
+for class_id, count in class_counts.items():
+    print(f"Class {class_id}: {count} objects")
 

@@ -3,7 +3,7 @@ from PIL import Image
 
 # Define the source and output directories
 source_dir = r'c:\Users\Kygo\Desktop\320-croppadded'
-output_dir = r'c:\Users\Kygo\Desktop\crop-padflip'
+output_dir = r'c:\Users\Kygo\Desktop\test'
 
 # Ensure the output directory exists
 os.makedirs(output_dir, exist_ok=True)
