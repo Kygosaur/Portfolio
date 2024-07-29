@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Permissions-Policy" content="attribution-reporting=(), run-ad-auction=(), join-ad-interest-group=(), browsing-topics=()">
+  <title>Booking Form | Firebase</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="container">
+      <form action="/submit_form.php" method="post" id="bookingForm">
+
+          <div class="inputBox">
+              <label for="name">Name Input :</label>
+              <input type="text" id="name" name="name" placeholder="Your name...." />
+          </div>
+
+          <div class="inputBox">
+              <label for="room">Room Selection :</label>
+              <select id="room" name="room">
+                <option value="1">Room 1</option>
+                <option value="2">Room 2</option>
+                <option value="3">Room 3</option>
+                <option value="4">Room 4</option>
+              </select>
+          </div>
+
+          <div class="inputBox">
+              <label for="date">Date Selection :</label>
+              <input type="date" id="date" name="date" />
+          </div>
+
+          <div class="inputBox">
+              <button type="submit">Submit</button>
+          </div>
+      </form>
+  </div>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+<script src="https://raw.githubusercontent.com/Kygosaur/Portfolio/main/Freelance/End.js"></script>
+
+</body>
+
+</html>
