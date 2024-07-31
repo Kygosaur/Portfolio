@@ -68,5 +68,5 @@ def process_unpaired_files(directory):
     print(f"\nSummary written to: {summary_file_path}")
 
 # Example usage
-directory = r"c:\Users\jack\Desktop\images"
+directory = r"c:\Users\jack\Desktop\awa"
 process_unpaired_files(directory)
